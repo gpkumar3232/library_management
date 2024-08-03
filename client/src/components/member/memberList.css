@@ -1,0 +1,28 @@
+.subheader {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.search-container {
+    display: flex;
+    width: 50%;
+    justify-content: flex-start;
+    /* padding-left: 10px */
+}
+
+.addContainer {
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    align-content: center;
+    /* padding-right: 20px */
+}
+
+.addBook {
+    background-color: #fff;
+    color: #005374;
+    border-color: #005374;
+    border-radius: 10px;
+    cursor: pointer;
+}

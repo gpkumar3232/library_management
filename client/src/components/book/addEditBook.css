@@ -1,0 +1,60 @@
+.addBookRoot {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.addBookRoot input {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+
+.bookForm {
+    display: flex;
+    flex-direction: column;
+}
+
+.bookForm span {
+    color: red;
+    padding: 5px;
+    font-size: small;
+    margin-top: -10px;
+}
+
+.formButton {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.formButton button {
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin: 15px 0px;
+    cursor: pointer;
+}
+
+.formButton .back {
+    background-color: #fff;
+    color: #ad639e;
+    border-color: #ad639e;
+    border-radius: 5px;
+}
+
+.bookForm label {
+    font-size: medium;
+    margin-bottom: 5px;
+
+}
+
+.bookForm select {
+    margin: 5px 0px;
+    padding: 10px 0px;
+}
+
+.bookForm option {
+    font-size: 15px;
+}

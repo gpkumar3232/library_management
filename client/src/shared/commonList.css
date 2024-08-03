@@ -1,0 +1,65 @@
+table {
+    display: block;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    max-width: 100%;
+    overflow-x: hidden;
+    width: 100%;
+    display: inline-table
+}
+
+th {
+    text-transform: capitalize;
+    padding: 10px;
+    background: #e5eaf5;
+}
+
+td {
+    padding: 10px;
+    word-break: break-all;
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.iconContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.iconContainer button {
+    cursor: pointer;
+    color: white;
+    border-radius: 5px 10px;
+    border: 0;
+    padding: 5px 10px
+}
+
+.rejectMsg {
+    font-size: 11px;
+    color: red;
+    width: 10rem;
+    align-self: center;
+    margin: 0
+}
+
+i {
+    font-size: large;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.noRecord {
+    display: flex;
+    padding: 100px;
+    justify-content: center;
+}

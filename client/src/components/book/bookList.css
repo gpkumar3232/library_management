@@ -1,0 +1,59 @@
+.mainBookContainer {
+    width: 100%;
+    height: 100%;
+}
+
+.bookContainer {
+    padding: 0rem 1rem;
+    margin-left: 1rem;
+}
+
+.bookContainer.subheader {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.bookContainer.search-container {
+    display: flex;
+    width: 50%;
+    justify-content: flex-start;
+}
+
+.subheader .addContainer {
+    display: flex;
+    width: 50%;
+    justify-content: flex-end;
+    align-content: center;
+}
+
+.addContainer .addBook {
+    background-color: #005374;
+    color: #fff;
+    border-color: #005374;
+    border-radius: 10px;
+    cursor: pointer;
+    padding: 0px 10px;
+    border: 0px;
+    font-size: 1rem;
+}
+
+.addContainer .filterContainer {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.filterContainer h4 {
+    padding-right: 0.5rem;
+}
+
+.filterContainer .filter {
+    align-self: center;
+    padding: 5px 2px;
+    margin: 0px;
+    height: fit-content;
+    max-height: 2rem;
+}

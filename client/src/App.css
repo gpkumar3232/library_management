@@ -1,0 +1,30 @@
+.toast {
+  background: 'darkblue';
+  color: '#fff';
+  font-size: '20px';
+  /* width: 34vw; */
+  padding: 30px 20px;
+}
+
+main {
+  padding: 4rem 1rem;
+  margin-left: 1rem;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: lightgray;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: grey;
+}

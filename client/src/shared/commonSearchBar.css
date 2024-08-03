@@ -1,0 +1,28 @@
+.searchContainer {
+    display: flex;
+    align-self: center;
+    border: 1px solid #d8d8e0;
+    width: 100%;
+}
+
+.searchContainer .iconContainer {
+    display: flex;
+    background-color: #d8d8e0
+}
+
+.iconContainer .icon {
+    color: black;
+    align-self: center;
+    font-size: 20px;
+}
+
+.searchContainer input {
+    background-color: transparent;
+    border: 0;
+    color: black;
+    width: 100%;
+}
+
+.searchContainer input:focus {
+    outline: none;
+}

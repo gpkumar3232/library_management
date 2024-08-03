@@ -1,0 +1,167 @@
+/* .dashboardContainer {
+    padding: 4rem 1rem;
+    margin-left: 1rem;
+} */
+
+.header {
+    display: flex;
+    flex-direction: row;
+}
+
+.header h2 {
+    align-self: center;
+    justify-content: flex-start;
+    width: 50%;
+}
+
+.header .rightSide {
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.rightSide .searchBarContainer {
+    width: 300px;
+    padding-right: 0.8rem;
+}
+
+.bookCard p {
+    padding: 0px;
+    /* margin: 0px 10px 5px 0px; */
+    color: white;
+    text-align: center;
+    /* align-self: center; */
+}
+
+.rootContainer {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.bookCard {
+    margin-bottom: 20px;
+    width: 10rem;
+    padding: 2rem;
+    border: 0.5px solid black;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.quickAccess {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 0px 8px #ddd;
+    max-height: 10rem;
+    overflow-y: auto;
+    margin: 0;
+    margin-top: 0.1rem;
+    top: 7.65rem;
+    right: 1.2rem;
+    cursor: pointer;
+    position: absolute;
+    width: 300px;
+}
+
+.quickAccess p {
+    margin: 0px;
+    padding: 0.3rem 0.4rem;
+}
+
+.quickAccess p:hover {
+    background-color: #e4e4e4;
+}
+
+.detailsCard {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+
+.leftCard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 0px 0px;
+    border: 1px;
+    border-color: #ddd;
+    border-style: solid;
+    border-radius: 20px;
+    box-shadow: 0px 0px 1rem #ddd;
+    width: 50%;
+    margin-right: 2rem;
+}
+
+.leftCard .profileImg {
+    margin-left: 1rem;
+    /* justify-content: flex-start; */
+}
+
+.leftCard .userCard {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.userCard h3 {
+    text-align: center;
+}
+
+.userCard .userContent {
+    width: 100%;
+}
+
+.detailsCard .latestRecordCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    border: 1px;
+    border-color: #ddd;
+    border-style: solid;
+    border-radius: 20px;
+    box-shadow: 0px 0px 1rem #ddd;
+    width: 50%;
+    margin-right: 1rem;
+}
+
+/* .detailsCard .leftCard .userCard .userContent .sectionHead .value {
+    word-break: none;
+} */
+
+.sectionHead {
+    display: flex;
+    /* width: 100%; */
+    flex-direction: row;
+}
+
+.sectionHead .header {
+    /* width: 20%; */
+    font-size: 1rem;
+    font-weight: bolder;
+    /* align-self: flex-start; */
+}
+
+.sectionHead .value {
+    /* width: 80%; */
+    font-size: 1rem;
+    /* align-self: center; */
+    text-align: left;
+    /* word-break: break-all; */
+}
+
+.latestRecContainer {
+    display: block;
+}
+
+
+.latestRecContainer p {
+    cursor: pointer;
+    word-break: break-all;
+}

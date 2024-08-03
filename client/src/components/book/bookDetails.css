@@ -1,0 +1,53 @@
+.bookDetailsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.bookDetailsContainer .rootContainer {
+    display: block;
+    padding: 1rem 5rem;
+    border: 1px;
+    border-color: #ddd;
+    border-style: solid;
+    border-radius: 20px;
+    box-shadow: 0px 0px 1rem #ddd;
+}
+
+.sectionHead {
+    display: flex;
+    /* background-color: aliceblue; */
+    /* width: 100%; */
+    flex-direction: row;
+}
+
+.sectionHead .header {
+    width: 50%;
+    font-size: 1rem;
+    font-weight: bolder;
+    align-self: center;
+
+}
+
+.sectionHead .value {
+    width: 50%;
+    font-size: 1rem;
+    align-self: center;
+    /* text-align: center; */
+}
+
+.buttonContainer {
+    display: flex;
+    /* width: 100%; */
+    /* flex-direction: row; */
+    justify-content: center;
+}
+
+.buttonContainer button {
+    color: white;
+    border: 0;
+    padding: 5px 10px;
+    border-radius: 5px 10px;
+    cursor: pointer
+}
