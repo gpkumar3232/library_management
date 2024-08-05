@@ -78,6 +78,12 @@ Run `npm start` for a dev server.
    ![login](screenshots/issueBook.png)
  - Admin can able to see list of issued book and the details like member id,name,title,issue date, due date, etc...
 
+**Request Books**
+
+   ![login](screenshots/requestBook.png)
+  - Admin can able to approve or reject the requested book.
+  - Admin can able to see list of issued book and the details like member id,name,title,issue date, due date, etc...
+
 **Settings**
 `Genre`
 
