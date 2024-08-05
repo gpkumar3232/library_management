@@ -9,24 +9,35 @@ The application typically is used for manage the book in the Library. This appli
 		- Atlas - `mongodb+srv://<username>:<password>.vipoq7o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 	
 ## Development server
-**Front-end **
+ **Front-end**
+ 
 Changing the directory `cd client`
-Run `npm install` to install required packages.
-Run `npm start` for a dev server.
-Navigate to `http://localhost:3000/` for client side.
 
-**Back-end **
-Changing the directory `cd server`
 Run `npm install` to install required packages.
+
+Run `npm start` for a dev server.
+
+Navigate to `http://localhost:3000/` for client side.
+ 
+ **Back-end**
+ 
+Changing the directory `cd server`
+
+Run `npm install` to install required packages.
+
 Run `npm start` for a dev server.
 
 ## Login credentials
  **For Admin Login**
+ 
 `Email` : admin@zit.com
+
 `Passowrd` : Zit@2@4@
 
  **For Member Login**
+ 
 `Email` : testuser@gmail.com
+
 `Passowrd`: Zit@1234
 
 ## User Flow
@@ -38,6 +49,7 @@ Run `npm start` for a dev server.
   
   ![login](screenshots/login.png)
  - Admin can  signin the application using  Admin credentials.
+
 `Change Password`
 
   ![login](screenshots/changePassword.png)
@@ -93,11 +105,15 @@ Run `npm start` for a dev server.
 ## Member
 
  **Authentication**
+ 
   `Sign In`
+  
  - Member can signin the application using member credentials.
  - The default password for member is Zit@1234.
  - If the member create new email id for login then defalut password is automatically generated and the password is Zit@1234.
+
 `Change Password`
+
  - Member can able to change the password.
 
 **Dashboard**
