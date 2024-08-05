@@ -1,12 +1,13 @@
-import './commonList.css'
 import moment from 'moment'
 
+import './commonList.css'
+//functional component to render Common List
 const CommonList = (props) => {
-
+    //variable to store the header list
     const list = props.list;
-
+    //variable to store the data list
     const data = props.data;
-
+    //variable to store the button colors
     const color = { View: '#ff8517', Reject: '#4a4a4a', Cancel: '#ff696e', Request: '#0ca85a', Sent: '#357994', Approve: '#ad639e', Return: '#00abab', }
 
     return (
@@ -31,7 +32,10 @@ const CommonList = (props) => {
                                             <div className='iconContainer'>
                                                 {typeof (item[val?.column]) == 'string' ?
                                                     <td key={key + k}>
-                                                        <button onClick={() => { props?.onClick(item[val?.column], item) }} style={{ backgroundColor: color[item[val?.column]] }}>{item[val?.column]}</button>
+                                                        {item[val?.column] ?
+                                                            <button onClick={() => { props?.onClick(item[val?.column], item) }} style={{ backgroundColor: color[item[val?.column]] }}>{item[val?.column]}</button>
+                                                            : <p>N/A</p>
+                                                        }
                                                         {(!item.due_date && item.reason) &&
                                                             <p className='rejectMsg' >Rejected : {item.reason}</p>
                                                         }

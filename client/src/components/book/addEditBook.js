@@ -1,32 +1,37 @@
 import { useEffect, useState } from "react";
-import { toast } from 'react-toastify';
 import { useFormik } from "formik";
 import * as Yup from 'yup';
 import moment from "moment";
+import Select from "react-select"
+import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from "react-router-dom";
-import { Input, MenuItem, Select, TextField } from "@mui/material";
-import BookService from "../../services/bookServices";
+
+import CommonDialogBox from "../../shared/commonDialogBox";
 import Loader from "../../shared/loader";
+
+import BookService from "../../services/bookServices";
 import GenreService from "../../services/genreServices";
 
 import './addEditBook.css'
-
+//functional component to render Add Edit Book Details
 function AddEditBook() {
-
+    // variable to store props value from useLocation hook
     const parms = useLocation();
-
+    // variable to store navigation from useNavigate hook
     const navigate = useNavigate();
-
+    //variable to store the book details in edit case
     const [data, setData] = useState()
-
+    //variable to store the List of Genre
     const [genreList, setGenreList] = useState()
-
+    //variable is used to maintain the Loader
     const [load, setLoad] = useState(true)
-
+    //variable to maintain the visibility of the confirmation dialog
+    const [isVisible, setIsVisible] = useState(false)
+    // useEffect hook to fetch list of genre
     useEffect(() => {
         getAllGenre()
     }, [])
-
+    // Function which is used to fetch all genres
     const getAllGenre = () => {
         GenreService.getAllGenre().then(res => {
             if (res) {
@@ -45,7 +50,7 @@ function AddEditBook() {
             console.log(err)
         })
     }
-
+    // Function which is used to fetch details of a single book
     const getOneBookDetails = () => {
         BookService.getAllBook({ isbn: parms?.state?.isbn }).then(res => {
             if (res) {
@@ -58,7 +63,7 @@ function AddEditBook() {
             console.log('Get One Book Details Error')
         })
     }
-
+    // variable which is used to define validation schema using Yup
     const validationSchema = Yup.object().shape({
         title: Yup.string()
             .required('Title is Required'),
@@ -74,7 +79,7 @@ function AddEditBook() {
             .min(1, 'Minimum 1 Copies is Rquired'),
         publicationDate: Yup.date().required('Publication Date is Required'),
     })
-
+    // variable which is used to initialize formik with initial values, validation schema, and submit handler
     const formik = useFormik({
         initialValues: {
             title: data?.title || '',
@@ -89,7 +94,7 @@ function AddEditBook() {
         onSubmit: (values) => { onUploadBook() },
         validationSchema: validationSchema
     })
-
+    // Function which is used to upload book details
     const onUploadBook = () => {
         let val = formik.values;
         val.publicationDate = new Date(formik.values.publicationDate)
@@ -102,10 +107,16 @@ function AddEditBook() {
             }
         }).catch(err => {
             toast.error(err?.response.data.message)
-            console.log(err?.response)
         })
     }
-
+    // Function to handle confirmation dialog responses
+    const confirmation = (value) => {
+        if (value === "Yes") {
+            navigate('/books');
+            formik.resetForm();
+        }
+        setIsVisible(false)
+    }
     return (
         <main className={'addBookRoot'}>
             <h2>{data ? 'Edit' : 'Add'} Book Details</h2>
@@ -149,18 +160,41 @@ function AddEditBook() {
                     {(formik.errors.isbn && formik.touched.isbn) && <span>{formik.errors.isbn}</span>}
 
                     <label>Genre *</label>
-                    <Select input={<Input className="select" label="Name" />} MenuProps={{
-                        PaperProps: {
-                            style: {
-                                maxHeight: 200,
-                                width: 250,
-                            },
-                        }
-                    }} value={formik.values.genre} onBlur={formik.handleBlur('genre')} onChange={(e) => { formik.setFieldValue('genre', e.target.value); }}>
-                        {genreList?.map((item, key) => (
-                            <MenuItem value={item} key={key}>{item}</MenuItem >
-                        ))}
-                    </Select>
+                    <Select value={{ "value": formik.values.genre, "label": formik.values.genre }}
+                        options={[...genreList?.map((genre) => { return { "value": genre, "label": genre } })]}
+                        onChange={(e) => { formik.setFieldValue('genre', e.value) }}
+                        placeholder="Select an Genre"
+                        styles={{
+                            control: (provided, state) => ({
+                                ...provided,
+                                border: '1px solid grey', // Set your desired border color
+                                boxShadow: state.isFocused ? 'none' : 'none', // Remove the shadow
+                                '&:hover': {
+                                    border: '1px solid grey', // Keep the border color on hover
+                                },
+                                marginBottom: 10
+                            }),
+                            indicatorSeparator: () => ({
+                                display: 'none', // Hide the indicator separator (the line between the control and the dropdown indicator)
+                            }),
+                            placeholder: (provided) => ({
+                                ...provided,
+                                marginLeft: 0, // Remove margin for placeholder
+                            }),
+                            singleValue: (provided) => ({
+                                ...provided,
+                                color: 'black', // Color of the selected item
+                            }),
+                            option: (provided, state) => ({
+                                ...provided,
+                                backgroundColor: state.isSelected ? 'lightblue' : 'white', // Background color for selected option
+                                color: state.isSelected ? 'black' : 'black', // Text color for selected option
+                                '&:hover': {
+                                    backgroundColor: 'lightgray', // Background color on hover
+                                    cursor: 'pointer',
+                                },
+                            }),
+                        }} />
 
                     <label>Publication Date *</label>
                     <input type="date"
@@ -190,12 +224,19 @@ function AddEditBook() {
                     {(formik.errors.description && formik.touched.description) && <span>{formik.errors.description}</span>}
 
                     <div className="formButton">
-                        <button className="back" type="reset" onClick={() => { navigate('/books'); formik.resetForm(); }}>Back</button>
+                        <button className="back" type="reset" onClick={() => { formik.dirty ? setIsVisible(true) : navigate('/books') }}>Back</button>
                         <button className="submit" type="submit" disabled={!formik.dirty && !formik.isValid} onClick={formik.handleSubmit}>Submit</button>
                     </div>
                 </div>
             }
-
+            <CommonDialogBox
+                visible={isVisible}
+                setVisible={setIsVisible}
+                title={'Confirmation'}
+                content={'Are you sure you want to leave this Page?'}
+                button={['No', 'Yes']}
+                onClick={confirmation}
+            />
         </main>
     )
 }

@@ -20,7 +20,7 @@ nav {
 
 .leftside .menuIcon {
     align-self: center;
-    padding-right: 10px;
+    padding: 0px 10px;
     cursor: pointer;
     font-size: 25px
 }

@@ -1,7 +1,7 @@
-import './commonSearchBar.css'
-
 import SearchIcon from '@mui/icons-material/Search';
 
+import './commonSearchBar.css'
+//functional component to render SearchBar
 function CommonSearchBar(props) {
 
     return (

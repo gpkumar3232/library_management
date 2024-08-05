@@ -1,6 +1,7 @@
 import Lottie from "react-lottie"
 import animationData from '../assets/book.json'
 
+//functional component to render Lottie Animation
 const Loader = () => {
     return (
         <Lottie

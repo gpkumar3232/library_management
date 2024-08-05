@@ -1,35 +1,81 @@
-.mainContainer {
-    overflow: hidden;
-    height: 100vh;
+@media screen and (min-width: 900px) {
+    .mainContainer {
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    .img-container {
+        width: 70%;
+        height: 91%;
+        display: flex;
+        align-self: center;
+        justify-content: center;
+        padding: 2rem;
+        margin-left: 1rem;
+    }
+
+    .signInContainer {
+        width: 28rem;
+        height: 33.5rem;
+        padding: 10px;
+        border-radius: 50px;
+        background-color: #312C34;
+        position: absolute;
+        right: 3rem;
+        top: 5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .forgetText {
+        font-size: 0.9rem;
+        color: white;
+        cursor: pointer;
+        padding-right: 50px;
+        margin-top: -5px;
+    }
 }
 
-.img-container {
-    width: 70%;
-    height: 91%;
-    display: flex;
-    align-self: center;
-    justify-content: center;
-    padding: 2rem;
-    margin-left: 1rem;
+@media screen and (max-width: 900px) {
+    .mainContainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .img-container {
+        display: none;
+    }
+
+    .signInContainer {
+        width: 28rem;
+        height: 33.5rem;
+        padding: 10px;
+        border-radius: 50px;
+        background-color: #312C34;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .forgetText {
+        font-size: 0.9rem;
+        color: white;
+        cursor: pointer;
+        padding-left: 6.5rem;
+        margin-top: -3px;
+    }
 }
+
 
 .loginImg {
     border-radius: 50px;
 }
 
 
-.signInContainer {
-    width: 28rem;
-    height: 33.5rem;
-    padding: 10px;
-    border-radius: 50px;
-    background-color: #312C34;
-    position: absolute;
-    right: 3rem;
-    top: 5rem;
-    display: flex;
-    flex-direction: column;
-}
+
 
 .signInContainer h2 {
     color: white;
@@ -103,11 +149,11 @@
 .inputContainer input:-webkit-autofill:hover,
 .inputContainer input:-webkit-autofill:focus,
 .inputContainer input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px #312C34 inset !important;
+    -webkit-box-shadow: 0 0 0 30px #312C34 inset;
 }
 
 .inputContainer input:-webkit-autofill {
-    -webkit-text-fill-color: white !important;
+    -webkit-text-fill-color: white;
 }
 
 .signInContainer .errorContainer {
@@ -120,13 +166,7 @@
     justify-content: flex-end
 }
 
-.forgetText {
-    font-size: 0.9rem;
-    color: white;
-    cursor: pointer;
-    padding-right: 50px;
-    margin-top: -5px;
-}
+
 
 .button-container {
     display: flex;

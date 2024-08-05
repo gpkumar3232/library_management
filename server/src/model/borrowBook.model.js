@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+// Define the schema for the Borrow Book model
 const BorrowSchema = new mongoose.Schema({
     member_id: {
         type: String,

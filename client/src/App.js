@@ -24,15 +24,17 @@ import Loader from "./shared/loader.js";
 import PageNotFound from "./shared/pageNotFound.js";
 
 function App() {
-
+  // variable to tracks if the user is logged in
   const [isLogged, setIsLogged] = useState(false)
-
+  // variable to stores user details
   const [userDetails, setUserDetails] = useState()
-
+  // variable to tracks the number of borrowed books
   const [borrowCount, setBorrowCount] = useState(0)
-
+  // variable to indicates if the app is loading
   const [load, setLoad] = useState(true)
-
+  // variable to tracks the currently selected menu item
+  const [selectedMenu, setSelectedMenu] = useState('Dashboard')
+  // useEffect hook to fetch user details
   useEffect(() => {
     AuthService.getUserDetails().then(res => {
       if (res) {
@@ -54,6 +56,8 @@ function App() {
       setUserDetails: setUserDetails,
       borrowCount: borrowCount,
       setBorrowCount: setBorrowCount,
+      selectedMenu: selectedMenu,
+      setSelectedMenu: setSelectedMenu,
     }}>
       {load ?
         <Loader /> :

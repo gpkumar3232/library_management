@@ -9,19 +9,22 @@ import MemberService from "../../services/memberService";
 import Loader from "../../shared/loader";
 
 import '../book/addEditBook.css'
-
+import CommonDialogBox from "../../shared/commonDialogBox";
+//functional component to render Add Edit Member Details
 function AddEditMember() {
-
+    // variable to store props value from useLocation hook
     const parms = useLocation();
-
+    // variable to store navigation from useNavigate hook
     const navigate = useNavigate();
-
+    //variable to store the member details in edit case
     const [data, setData] = useState()
-
+    //variable is used to maintain the Loader
     const [load, setLoad] = useState(true)
-
+    //variable is used to List of Roles
     const roleList = ['Student', 'Faculty', 'Technician', 'Lab Assitant', 'Office Assistant']
-
+    //variable to maintain the visibility of the confirmation dialog
+    const [isVisible, setIsVisible] = useState(false)
+    // useEffect hook to fetch member details if editing otherwise, just stop loading 
     useEffect(() => {
         setLoad(true)
         if (parms?.state)
@@ -29,7 +32,7 @@ function AddEditMember() {
         else
             setLoad(false)
     }, [])
-
+    // Function which is used to fetch details for a specific member based on ID
     const getOneMemberDetails = () => {
         MemberService.getAllMember({ id: parms?.state?.id }).then(res => {
             if (res) {
@@ -42,20 +45,23 @@ function AddEditMember() {
             console.log('Get One Member Details Error')
         })
     }
-
+    // variable which is used to define validation schema using Yup
     const validationSchema = Yup.object().shape({
         name: Yup.string()
-            .required('Name is Required'),
+            .required('Member name is Required'),
         id: Yup.string()
-            .min(3, 'Minimum length of ID is 3')
+            .min(3, 'ID should be at least 3 characters')
             .required('ID is Required'),
         email: Yup.string()
+            .email('Enter a valid email address')
             .required('Email is Required'),
-        phone: Yup.number().typeError('Invalid Type').required('Phone Number is Required'),
+        phone: Yup.number()
+            .typeError('Phone number must be a number')
+            .required('Phone Number is Required'),
         role: Yup.string()
-            .required('Role is Required')
+            .required('Please select a role')
     })
-
+    // variable which is used to initialize formik with initial values, validation schema, and submit handler
     const formik = useFormik({
         initialValues: {
             name: data?.name ? data?.name : '',
@@ -68,9 +74,12 @@ function AddEditMember() {
         onSubmit: () => { onUploadMember() },
         validationSchema: validationSchema
     })
-
+    // Function which is used to upload member details
     const onUploadMember = () => {
-        MemberService.saveMemberDetails(formik.values).then(res => {
+        let val = formik.values;
+        if (data)
+            val['_id'] = data['_id'];
+        MemberService.saveMemberDetails(val, data ? data['_id'] : '').then(res => {
             if (res) {
                 toast.success(res?.data?.message)
                 navigate('/members')
@@ -80,7 +89,14 @@ function AddEditMember() {
             console.log(err?.response)
         })
     }
-
+    // Function to handle confirmation dialog responses
+    const confirmation = (value) => {
+        if (value === "Yes") {
+            navigate('/members');
+            formik.resetForm();
+        }
+        setIsVisible(false)
+    }
 
     return (
         <main className={'addBookRoot'}>
@@ -139,12 +155,19 @@ function AddEditMember() {
 
 
                     <div className="formButton">
-                        <button className="back" type="reset" onClick={() => { navigate('/members'); formik.resetForm(); }}>Back</button>
+                        <button className="back" type="reset" onClick={() => { formik.dirty ? setIsVisible(true) : navigate('/members'); }}>Back</button>
                         <button className="submit" type="submit" disabled={!formik.dirty && !formik.isValid} onClick={formik.handleSubmit}>Submit</button>
                     </div>
                 </div>
             }
-
+            <CommonDialogBox
+                visible={isVisible}
+                setVisible={setIsVisible}
+                title={'Confirmation'}
+                content={'Are you sure you want to leave this Page?'}
+                button={['No', 'Yes']}
+                onClick={confirmation}
+            />
         </main>
     )
 }

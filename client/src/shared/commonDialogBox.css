@@ -1,0 +1,46 @@
+.dialogTitle {
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+}
+
+.css-ypiqx9-MuiDialogContent-root {
+    padding: 0px 1rem
+}
+
+.css-bdhsul-MuiTypography-root-MuiDialogTitle-root {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.25rem;
+    padding: 12px 16px;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+.contentContainer {
+    padding: 0px 5px;
+    margin: 0px;
+}
+
+.action {
+    padding: 0rem 5px;
+}
+
+.action .cancel {
+    background-color: #fff;
+    border: 0px;
+    cursor: pointer;
+    padding-right: 1rem;
+    font-size: 1rem;
+}
+
+.action .submit {
+    font-size: 1rem;
+    background-color: #ad639e;
+    border: 0px;
+    color: #fff;
+    padding: 5px 6px;
+    border-radius: 5px;
+    cursor: pointer;
+}

@@ -5,32 +5,42 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import CommonSearchBar from '../../shared/commonSearchBar';
 import Loader from '../../shared/loader';
 import UserContext from '../../shared/userContext';
+import { useResponsiveWidth } from '../../hooks/useWindowWidth';
+
 import BookService from '../../services/bookServices';
 import BorrowBookService from '../../services/borrowBookService';
 
 import './dashboard.css'
-
+//functional component to render Dashboard
 function Dashboard() {
-
-    const { userDetails, setBorrowCount } = useContext(UserContext);
-
+    // variable to store navigation from useNavigate hook
     const navigate = useNavigate();
-
+    //variable to stroe the borrow book count & userDetails
+    const { userDetails, setBorrowCount } = useContext(UserContext);
+    //variable to maintain the window width
+    const width = useResponsiveWidth();
+    //variable to store the book details count
     const [data, setData] = useState({ total: 0, borrow: 0, overDue: 0, })
-
+    //variable is used to maintain the Loader
     const [load, setLoad] = useState(true)
-
+    //variable to store the values of search text
     const [searchVal, setSearchVal] = useState('')
-
+    //variable to store the book list
     const [bookList, setBookList] = useState([])
-
+    // variable to maintain the search focus or not
     const [searchFocus, setSearchFocus] = useState(false)
-
+    // useEffect hook to Fetch all books and borrowing details on component mount
     useEffect(() => {
         setLoad(true)
         getAllBook()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
+    // useEffect hook to Update search focus state when search value changes
+    useEffect(() => {
+        if (searchVal)
+            setSearchFocus(true);
+    }, [searchVal])
+    // Function which is used to fetch all books and borrowing information
     const getAllBook = () => {
         BookService.getAllBook().then(res => {
             if (res) {
@@ -60,12 +70,7 @@ function Dashboard() {
             console.log(err)
         })
     }
-
-    useEffect(() => {
-        if (searchVal)
-            setSearchFocus(true);
-    }, [searchVal])
-
+    // Function which is used to Handle overlay click to close search suggestions
     const handleOverlayClick = () => {
         setSearchFocus(false)
     };
@@ -108,34 +113,37 @@ function Dashboard() {
                     </div>
                     <div className='detailsCard'>
                         <div className='leftCard'>
-                            <div className='profileImg'>
-                                <img src={require('../../assets/profile.jpg')} alt={require('../../assets/profile.jpg')} height={250} width={250} style={{ objectFit: 'cover' }} />
-                            </div>
-                            <div className='userCard' >
-                                <h3>Information</h3>
-                                <div className='userContent'>
-                                    <div className="sectionHead">
-                                        <p className="header">Name</p>
-                                        <p className="value">{userDetails?.name}</p>
-                                    </div>
-                                    <div className="sectionHead">
-                                        <p className="header">Email</p>
-                                        <p className="value">{userDetails?.email}</p>
-                                    </div>
-                                    <div className="sectionHead">
-                                        <p className="header">Id</p>
-                                        <p className="value">{userDetails?.id}</p>
-                                    </div>
-                                    <div className="sectionHead">
-                                        <p className="header">Role</p>
-                                        <p className="value">{userDetails?.role}</p>
-                                    </div>
-                                    <div className="sectionHead">
-                                        <p className="header">Phone</p>
-                                        <p className="value">{userDetails?.phone}</p>
+                            <h3>Information</h3>
+                            <div className='infoCard'>
+                                <div className='profileImg'>
+                                    <img src={require('../../assets/profile.jpg')} alt={require('../../assets/profile.jpg')} height={250} width={250} style={{ objectFit: 'cover' }} />
+                                </div>
+                                <div className='userCard' >
+                                    <div className='userContent'>
+                                        <div className="sectionHead">
+                                            <p className="header">Name</p>
+                                            <p className="value">{userDetails?.name}</p>
+                                        </div>
+                                        <div className="sectionHead">
+                                            <p className="header">Email</p>
+                                            <p className="value">{userDetails?.email}</p>
+                                        </div>
+                                        <div className="sectionHead">
+                                            <p className="header">Id</p>
+                                            <p className="value">{userDetails?.id}</p>
+                                        </div>
+                                        <div className="sectionHead">
+                                            <p className="header">Role</p>
+                                            <p className="value">{userDetails?.role}</p>
+                                        </div>
+                                        <div className="sectionHead">
+                                            <p className="header">Phone</p>
+                                            <p className="value">{userDetails?.phone}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         {!userDetails?.isAdmin ?
                             <div className='latestRecordCard'>
@@ -159,8 +167,8 @@ function Dashboard() {
                                             faded: { innerRadius: 10, additionalRadius: -10, color: 'gray' },
                                         },
                                     ]}
-                                    width={500}
-                                    height={250}
+                                    width={width > 600 ? 500 : 370}
+                                    height={width > 600 ? 250 : 150}
                                 />
                             </div>
                         }

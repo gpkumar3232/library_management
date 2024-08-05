@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import moment from "moment";
 
 import Loader from "../../shared/loader.js";
 import UserContext from "../../shared/userContext.js";
@@ -9,25 +10,25 @@ import BookService from '../../services/bookServices.js'
 import BorrowBookService from "../../services/borrowBookService.js";
 
 import './bookDetails.css'
-import moment from "moment";
-
+//functional component to render Book Details 
 function BookDetails() {
-
+    //variable to Access user details from context
     const { userDetails } = useContext(UserContext);
-
+    // variable to store props value from useLocation hook
     const parms = useLocation();
-
+    //variable to store the book details
     const [data, setData] = useState([])
-
+    //variable is used to maintain the Loader
     const [load, setLoad] = useState(true)
-
+    //variable is used to Color mapping for button styles based on book status
     const color = { Cancel: '#ff696e', Request: '#0ca85a', Return: '#00abab' }
-
+    // useEffect hook to fetch book details and borrow information
     useEffect(() => {
         setLoad(true)
         getAllBook();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
+    // Function which is used to fetch book details and borrowing information
     const getAllBook = () => {
         BookService.getAllBook({ isbn: parms?.state?.data?.isbn }).then(res => {
             if (res) {
@@ -59,7 +60,7 @@ function BookDetails() {
             console.log('Error', err)
         })
     }
-
+    // Function to handle status update of the book borrowing request
     const onUpdateStatus = (val) => {
         val.member_id = userDetails?.id;
         val.member_name = userDetails?.name;

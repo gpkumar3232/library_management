@@ -1,21 +1,23 @@
-import { useFormik } from "formik";
 import * as Yup from 'yup'
-import AuthService from "../../services/authServices";
+import { useFormik } from "formik";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+
+import AuthService from "../../services/authServices";
+
 import './changePassword.css'
 
+//functional component to render Login 
 const ChangePassword = () => {
-
+    // Variable to store navigation from useNavigate hook
     const navigate = useNavigate();
-
+    // Variable which is used to define validation schema using Yup
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .required('Email Id is Required')
-        // .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/, 'Email Id is Invalid')
-        ,
+            .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/, 'Email Id is Invalid Format'),
         oldPassword: Yup.string()
             .required('Old Password is Required'),
         newPassword: Yup.string()
@@ -31,6 +33,7 @@ const ChangePassword = () => {
                 }
             }),
     })
+    // Variable which is used to initialize formik with initial values, validation schema, and submit handler
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -41,7 +44,7 @@ const ChangePassword = () => {
         validationSchema: validationSchema,
         onSubmit: () => { setPassword() }
     })
-
+    //Method to Call login service and change Password
     const setPassword = () => {
         const data = {
             email: formik.values.email,

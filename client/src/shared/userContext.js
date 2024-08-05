@@ -7,6 +7,8 @@ const UserContext = createContext({
     setUserDetails: () => { },
     borrowCount: {},
     setBorrowCount: () => { },
+    selectedMenu: {},
+    setSelectedMenu: () => { },
 })
 
 export default UserContext;

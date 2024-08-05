@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+// Define the schema for the Member model
 const MemberSchema = new mongoose.Schema({
     name: {
         type: String,

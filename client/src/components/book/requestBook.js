@@ -2,19 +2,32 @@ import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import moment from "moment";
 
-import CommonList from "../../shared/commonList.js";
-import Loader from "../../shared/loader.js";
-import BorrowBookService from "../../services/borrowBookService.js";
-import BookService from "../../services/bookServices.js";
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
+
+import CommonList from "../../shared/commonList.js";
+import Loader from "../../shared/loader.js";
 import UserContext from "../../shared/userContext.js";
+
+import BorrowBookService from "../../services/borrowBookService.js";
+import BookService from "../../services/bookServices.js";
+
 import './requestBook.css';
-
+//functional component to render List of Request Books
 function RequestBook() {
-
+    //variable to Access context to update the borrow count
+    const { setBorrowCount } = useContext(UserContext)
+    //variable to store the request books list
+    const [data, setData] = useState([])
+    //variable is used to maintain the Loader
+    const [load, setLoad] = useState(true)
+    //variable to store the maintain the dialog box visible
+    const [dialogOpen, setDialogOpen] = useState(false)
+    //variable to store the selected request
+    const [selectedVal, setSelectedVal] = useState({ icon: '', value: {}, textVal: '' })
+    //variable to store the structure of the list to display in the CommonList component
     const list = [
         { column: 'member_id', type: 'Text', suffixText: 'Member Id' },
         { column: 'member_name', type: 'Text', suffixText: 'Name' },
@@ -24,27 +37,13 @@ function RequestBook() {
         { column: 'available', type: 'Text', suffixText: 'Available' },
         { column: 'status', type: 'Button', suffixText: 'Action' }
     ]
-
-    const { setBorrowCount } = useContext(UserContext)
-
-    const [data, setData] = useState([])
-
-    const [load, setLoad] = useState(true)
-
-    const [dialogOpen, setDialogOpen] = useState(false)
-
-    const [selectedVal, setSelectedVal] = useState({ icon: '', value: {}, textVal: '' })
-
+    // useEffect hook to Fetch borrow requests and book availability data
     useEffect(() => {
         setLoad(true)
         getAllBorrow();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
-
-    const onClick = (icon = null, value) => {
-        setDialogOpen(true)
-        setSelectedVal({ icon: icon, value: value })
-    }
-
+    // Function which is used to fetch all borrow requests and book details
     const getAllBorrow = () => {
         BookService.getAllBook().then(res => {
             BorrowBookService.getAllBorrow().then(response => {
@@ -55,7 +54,7 @@ function RequestBook() {
                         if (item.status === 'Request') {
                             borrowCount += 1;
                             let count = res?.data?.rows?.find((val) => val.isbn === item.isbn)?.available
-                            item.status = ['Approve', 'Reject']
+                            item.status = count > 0 ? ['Approve', 'Reject'] : 'Reject'
                             item.available = count;
                             temp.push(item);
                         }
@@ -75,7 +74,12 @@ function RequestBook() {
         })
 
     }
-
+    // Function which is used to Handle button clicks in the CommonList component
+    const onValueChange = (icon = null, value) => {
+        setDialogOpen(true)
+        setSelectedVal({ icon: icon, value: value })
+    }
+    // Function which is used to Update the status of a borrow request based on user action
     const onUpdateStatus = () => {
         let val = selectedVal.value;
         if (selectedVal.icon === 'Approve') {
@@ -103,7 +107,7 @@ function RequestBook() {
             {load ?
                 <Loader />
                 :
-                <CommonList list={list} data={data} onClick={onClick} />
+                <CommonList list={list} data={data} onClick={onValueChange} />
             }
             <Dialog open={dialogOpen} onClose={() => { setDialogOpen(false) }}>
                 <DialogTitle className="dialogTitle">{(selectedVal.icon === 'Approve') ? 'Due Date *' : 'Reason'}</DialogTitle>
@@ -121,7 +125,6 @@ function RequestBook() {
                     <button className="cancel" onClick={() => { setDialogOpen(false) }}>Cancel</button>
                     <button className="submit" disabled={selectedVal.textVal ? false : true} onClick={() => { onUpdateStatus(); setDialogOpen(false) }} type="submit">submit</button>
                 </DialogActions>
-
             </Dialog>
         </main>
     )

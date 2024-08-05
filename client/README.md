@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# College Library Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Getting Started
+The application typically is used for manage the book in the Library. This application is mainly focused for the user interface and which provides some operations, function etc..
 
-## Available Scripts
+### Prerequisites
+- node.js - This project requires Node.js and the version is that as been used is v18.12.1 . (`https://nodejs.org/en/`)
+-  Database
+		- Atlas - `mongodb+srv://<username>:<password>.vipoq7o.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+	
+## Development server
+**Front-end **
+Changing the directory `cd client`
+Run `npm install` to install required packages.
+Run `npm start` for a dev server.
+Navigate to `http://localhost:3000/` for client side.
 
-In the project directory, you can run:
+**Back-end **
+Changing the directory `cd server`
+Run `npm install` to install required packages.
+Run `npm start` for a dev server.
 
-### `npm start`
+## Login credentials
+ **For Admin Login**
+`Email` : admin@zit.com
+`Passowrd` : Zit@2@4@
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ **For Member Login**
+`Email` : testuser@gmail.com
+`Passowrd`: Zit@1234
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## User Flow
 
-### `npm test`
+### Admin
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+ **Authentication**
+  `Sign In`
+  
+  ![login](screenshots/login.png)
+ - Admin can  signin the application using  Admin credentials.
+`Change Password`
 
-### `npm run build`
+  ![login](screenshots/changePassword.png)
+ - Admin can change the password for their convience.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+**Dashboard**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+  ![login](screenshots/adminDashboard.png)
+ - Admin can overlook the count of total books, borrowed books, over-due
+   books and return books.  
+ - Admin can able to know the information about login details.
+ - Admin can able to see the size chart for the folllowing
+   total, borrowed,over due and retun books.
+   
+**Book List**
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  ![login](screenshots/bookList.png)
+ - Admin can add new book and for input book details (title, author, ISBN, genre, publication date, copies available).
+ - The book can update or modify book details and can update the stock for the book information.
+ - It can be delete from the Library
+ - Admin can able to search the book title author, genre etc...
+ 
+ **Book Details**
 
-### `npm run eject`
+  ![login](screenshots/AddEditBookDetails.png)
+`Adding New Book`
+ - The admin can able to add the new book with required details to add.
+`Edit Book`
+ - The admin can able to edit the existing book with the respective details and admin can able to update the count of the book.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+ **Member Details**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ![login](screenshots/addEditMemberDetails.png)
+ - Admin can able to add the member for the book library.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+**Issue Books**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   ![login](screenshots/issueBook.png)
+ - Admin can able to see list of issued book and the details like member id,name,title,issue date, due date, etc...
 
-## Learn More
+**Settings**
+`Genre`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+   ![login](screenshots/genreList.png)
+ - In this page, Add, edit and delete operation of Genre of the books can be handled easily which is used for Books categorization.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Member
 
-### Code Splitting
+ **Authentication**
+  `Sign In`
+ - Member can signin the application using member credentials.
+ - The default password for member is Zit@1234.
+ - If the member create new email id for login then defalut password is automatically generated and the password is Zit@1234.
+`Change Password`
+ - Member can able to change the password.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Dashboard**
 
-### Analyzing the Bundle Size
+   ![login](screenshots/userDashboard.png)
+ - Member can overlook the count of  borrowed books, over-due
+   books and return books.  
+ - Member can able to see 5 books which added recently. The book details are been showed if the member want to see it.
+ - Quick search can be done for finding the books list.
+ - Member can able to know the login details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+**Book List**
 
-### Making a Progressive Web App
+   ![login](screenshots/userBookList.png)
+ - Member can able to view the book details and can be request for the book or can able to cancel the request. 
+ - Which can able to see the availability of the book.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Book Details**
 
-### Advanced Configuration
+   ![login](screenshots/bookDetails.png)
+ - Member can be request for the book or can able to cancel the request. 
+ - Which can able to see the availability of the book and member can able to view the book details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Borrowing History**
 
-### Deployment
+   ![login](screenshots/borrowHistory.png)
+ - Member can able to see the list of books which are been purchased.
+ - Which can able to retun the book and member can be view the book details which is returned also.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
