@@ -8,7 +8,7 @@ import './commonDialogBox.css'
 function CommonDialogBox(props) {
     return (
         <Dialog open={props?.visible} onClose={() => { props.setVisible(false) }}>
-            <DialogTitle className="dialogTitle">{props?.title}</DialogTitle>
+            <DialogTitle className="dialogBoxTitle">{props?.title}</DialogTitle>
             <DialogContent>
                 <div className="contentContainer">
                     <p>{props?.content}</p>
