@@ -167,30 +167,30 @@ function AddEditBook() {
                         styles={{
                             control: (provided, state) => ({
                                 ...provided,
-                                border: '1px solid grey', // Set your desired border color
-                                boxShadow: state.isFocused ? 'none' : 'none', // Remove the shadow
+                                border: '1px solid grey',
+                                boxShadow: state.isFocused ? 'none' : 'none',
                                 '&:hover': {
-                                    border: '1px solid grey', // Keep the border color on hover
+                                    border: '1px solid grey',
                                 },
                                 marginBottom: 10
                             }),
                             indicatorSeparator: () => ({
-                                display: 'none', // Hide the indicator separator (the line between the control and the dropdown indicator)
+                                display: 'none',
                             }),
                             placeholder: (provided) => ({
                                 ...provided,
-                                marginLeft: 0, // Remove margin for placeholder
+                                marginLeft: 0,
                             }),
                             singleValue: (provided) => ({
                                 ...provided,
-                                color: 'black', // Color of the selected item
+                                color: 'black',
                             }),
                             option: (provided, state) => ({
                                 ...provided,
-                                backgroundColor: state.isSelected ? 'lightblue' : 'white', // Background color for selected option
-                                color: state.isSelected ? 'black' : 'black', // Text color for selected option
+                                backgroundColor: state.isSelected ? 'lightblue' : 'white',
+                                color: state.isSelected ? 'black' : 'black',
                                 '&:hover': {
-                                    backgroundColor: 'lightgray', // Background color on hover
+                                    backgroundColor: 'lightgray',
                                     cursor: 'pointer',
                                 },
                             }),

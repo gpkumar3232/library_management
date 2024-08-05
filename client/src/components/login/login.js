@@ -17,13 +17,14 @@ function Login() {
     // variable to store navigation from useNavigate hook
     const navigate = useNavigate();
     //variable to set the logged status & userDetails
-    const { setIsLogged, setUserDetails } = useContext(UserContext);
+    const { setIsLogged, setUserDetails, setSelectedMenu } = useContext(UserContext);
     //variable is used to maintain the Loader
     const [load, setLoad] = useState(false)
     // variable which is used to define validation schema using Yup
     const validationSchema = Yup.object().shape({
         username: Yup.string()
-            .required('Email is Required'),// Email is a required field
+            .required('Email is Required')
+            .email('Enter a valid email address'),
         password: Yup.string()
             .required('Password is Required')
             .min(8, 'Password must be at least 8 characters'),
@@ -54,6 +55,7 @@ function Login() {
                 toast.success('Login Successfully');
                 localStorage.setItem('token', JSON.stringify(res?.data?.token))
                 setUserDetails(res?.data?.details)
+                setSelectedMenu('Dashboard')
                 navigate('/')
                 setLoad(false)
             }

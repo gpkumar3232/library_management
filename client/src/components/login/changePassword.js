@@ -17,7 +17,7 @@ const ChangePassword = () => {
     const validationSchema = Yup.object().shape({
         email: Yup.string()
             .required('Email Id is Required')
-            .matches(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/, 'Email Id is Invalid Format'),
+            .email('Enter a valid email address'),
         oldPassword: Yup.string()
             .required('Old Password is Required'),
         newPassword: Yup.string()

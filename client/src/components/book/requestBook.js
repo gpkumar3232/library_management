@@ -120,6 +120,9 @@ function RequestBook() {
                             min={(selectedVal.icon === 'Approve') ? moment(new Date()).format('YYYY-MM-DD') : 2}
                             onChange={(e) => { setSelectedVal({ ...selectedVal, textVal: e.target.value }) }} />
                     </div>
+                    {!selectedVal?.textVal &&
+                        <span className="errorMessage">{(selectedVal.icon === 'Approve') ? 'Due Date' : 'Reason'} is Required</span>
+                    }
                 </DialogContent>
                 <DialogActions>
                     <button className="cancel" onClick={() => { setDialogOpen(false) }}>Cancel</button>

@@ -57,7 +57,10 @@ function AddEditMember() {
             .required('Email is Required'),
         phone: Yup.number()
             .typeError('Phone number must be a number')
-            .required('Phone Number is Required'),
+            .required('Phone Number is Required')
+            .test("IsCorrect", 'Phone number is Invalid', (val) => {
+                return /^[1-9]{1}\d{9}$/.test(String(val));
+            }),
         role: Yup.string()
             .required('Please select a role')
     })
@@ -114,6 +117,7 @@ function AddEditMember() {
                         onBlur={formik.handleBlur('name')}
                         onChange={formik.handleChange('name')}
                         placeholder="Enter the Name"
+                        autoComplete="off"
                     />
                     {(formik.errors.name && formik.touched.name) && <span>{formik.errors.name}</span>}
 
@@ -124,7 +128,8 @@ function AddEditMember() {
                         id="id"
                         value={formik.values.id}
                         onBlur={formik.handleBlur('id')}
-                        onChange={formik.handleChange('id')} />
+                        onChange={formik.handleChange('id')}
+                        autoComplete="off" />
                     {(formik.errors.id && formik.touched.id) && <span>{formik.errors.id}</span>}
 
                     <label>Email *</label>
@@ -133,7 +138,8 @@ function AddEditMember() {
                         name="email"
                         id="email" value={formik.values.email}
                         onBlur={formik.handleBlur('email')}
-                        onChange={formik.handleChange('email')} />
+                        onChange={formik.handleChange('email')}
+                        autoComplete="off" />
                     {(formik.errors.email && formik.touched.email) && <span>{formik.errors.email}</span>}
 
                     <label>Phone Number *</label>
@@ -143,7 +149,8 @@ function AddEditMember() {
                         id="phone" value={formik.values.phone}
                         onBlur={formik.handleBlur('phone')}
                         onChange={formik.handleChange('phone')}
-                        minLength={10} />
+                        // minLength={10}
+                        autoComplete="off" />
                     {(formik.errors.phone && formik.touched.phone) && <span>{formik.errors.phone}</span>}
 
                     <label>Role *</label>
